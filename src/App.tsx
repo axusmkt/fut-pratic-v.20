@@ -500,7 +500,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto text-center mb-24 px-4 text-center">
           <FadeUp>
             <Badge className="mb-6 border-white/20">POR QUE NOS ESCOLHER</Badge>
-            <h2 className="font-display text-4xl md:text-[10rem] font-black italic tracking-tighter mb-8 leading-[1] md:leading-none uppercase text-white">
+            <h2 className="font-display text-[10vw] md:text-[10rem] font-black italic tracking-tighter mb-8 leading-[1] md:leading-none uppercase text-white">
               O <span className="text-primary italic">FUTURO</span> AGORA
             </h2>
             <p className="text-white/40 font-medium tracking-tight text-sm md:text-xl max-w-3xl mx-auto leading-relaxed">
@@ -536,7 +536,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto">
           <FadeUp className="text-center mb-24 px-4">
              <Badge className="mb-6 text-primary border-primary/20">O QUE NOSSOS USUÁRIOS DIZEM</Badge>
-            <h2 className="font-display text-5xl md:text-[10rem] font-black italic tracking-tighter mb-8 leading-[0.9] md:leading-none uppercase text-white px-4">
+            <h2 className="font-display text-[10vw] md:text-[10rem] font-black italic tracking-tighter mb-8 leading-[0.9] md:leading-none uppercase text-white px-4">
               EXPERIÊNCIA <br className="md:hidden" /> <span className="text-primary italic">REAL</span>
             </h2>
             <p className="text-white/40 font-medium tracking-tight text-sm md:text-lg italic">Resultados de quem já utiliza a plataforma no dia a dia.</p>
@@ -567,7 +567,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto text-center mb-24 px-4">
           <FadeUp>
             <Badge className="mb-6">CUSTO VS BENEFÍCIO</Badge>
-            <h2 className="font-display text-4xl md:text-[10rem] font-black italic tracking-tighter leading-none mb-4 md:mb-8 uppercase text-white">
+            <h2 className="font-display text-[10vw] md:text-[10rem] font-black italic tracking-tighter leading-none mb-4 md:mb-8 uppercase text-white">
               VALOR <span className="text-primary italic">JUSTO</span>
             </h2>
             <p className="text-white/40 font-medium tracking-tight text-sm md:text-lg italic">Compare a praticidade e veja a diferença no final do mês.</p>
@@ -625,7 +625,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto">
           <FadeUp className="text-center mb-24 px-4">
             <Badge className="mb-6 text-primary border-primary/20 font-black">ACESSO IMEDIATO</Badge>
-            <h2 className="font-display text-5xl md:text-[10rem] font-black italic tracking-tighter mb-8 leading-none uppercase text-white">
+            <h2 className="font-display text-[10vw] md:text-[10rem] font-black italic tracking-tighter mb-8 leading-none uppercase text-white">
               ESCOLHA O SEU <span className="text-primary italic">PLANO</span>
             </h2>
             <p className="text-white/40 font-medium tracking-tight text-sm md:text-lg italic">Selecione o acesso ideal para o seu perfil e comece a assistir agora.</p>

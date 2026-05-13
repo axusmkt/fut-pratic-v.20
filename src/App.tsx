@@ -75,14 +75,14 @@ const FadeUp = ({ children, delay = 0, className = "" }: any) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-50px" }}
     transition={{ duration: 0.8, delay, ease: [0.21, 1.11, 0.81, 0.99] }}
-    className={className}
+    className={`will-change-transform ${className}`}
   >
     {children}
   </motion.div>
 );
 
 const Badge = ({ children, className = "" }: any) => (
-  <div className={`inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-3 py-1 md:px-4 md:py-1.5 text-[8px] md:text-xs font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-white/60 ${className}`}>
+  <div className={`inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-3 py-1 md:px-4 md:py-1.5 text-[8px] md:text-xs font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-white/60 will-change-transform ${className}`}>
     {children}
   </div>
 );
@@ -164,6 +164,7 @@ const CategoryCard = ({ label, sub, img, icon: Icon, delay }: any) => {
                   alt={label} 
                   className={`max-w-full max-h-full object-contain transition-all duration-500 group-hover:scale-110 ${imageLoading ? 'opacity-0' : 'opacity-100'}`}
                   referrerPolicy="no-referrer"
+                  loading="lazy"
                   onLoad={() => setImageLoading(false)}
                   onError={() => {
                     setImageError(true);
@@ -212,6 +213,7 @@ const BrandLogo = ({ brand }: { brand: { name: string, url: string }, key?: stri
           alt={brand.name} 
           className={`h-6 md:h-10 lg:h-12 w-auto object-contain transition-all duration-500 grayscale hover:grayscale-0 hover:opacity-100 cursor-pointer ${loading ? 'opacity-0 w-0' : 'opacity-50'}`}
           referrerPolicy="no-referrer"
+          loading="lazy"
           onLoad={() => setLoading(false)}
           onError={() => setError(true)}
         />
@@ -316,42 +318,20 @@ export default function App() {
           </FadeUp>
 
           <FadeUp delay={0.1}>
-            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black leading-[0.9] tracking-tighter italic uppercase text-white px-2 mb-2">
-              <span className="text-primary italic">+1500 Acessos</span> <br />
-              <span className="premium-gradient-text">liberados agora</span>
+            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[11rem] font-black leading-[1.1] tracking-tighter italic uppercase text-white px-2 mb-2 py-4">
+              <span className="text-primary italic">+1500 Canais e</span> <br />
+              <span className="premium-gradient-text">Conteúdos</span> <br />
+              <span className="opacity-30">Disponíveis</span>
             </h1>
           </FadeUp>
 
-          <FadeUp delay={0.15} className="max-w-4xl mx-auto w-full">
-            <div className="relative group">
-              <div className="absolute -inset-4 bg-primary/10 blur-[100px] opacity-0 group-hover:opacity-100 transition duration-1000"></div>
-              <div className="relative vsl-container rounded-[2.5rem] overflow-hidden bg-black/60 backdrop-blur-md border border-white/10 p-2 md:p-3 shadow-[0_0_80px_rgba(0,0,0,0.6)]">
-                 <div className="w-full h-full bg-neutral-900 rounded-[2rem] overflow-hidden relative group cursor-pointer aspect-video">
-                    <img 
-                      src="https://images.unsplash.com/photo-1518091044124-0101b02e54f7?q=80&w=2070&auto=format&fit=crop" 
-                      className="w-full h-full object-cover opacity-40 transition-transform duration-1000 group-hover:scale-110"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/0 transition-colors">
-                       <motion.div 
-                        whileHover={{ scale: 1.1, rotate: -5 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="w-20 h-20 md:w-28 md:h-28 bg-primary flex items-center justify-center rounded-full shadow-[0_10px_50px_rgba(57,255,20,0.5)] border-4 border-white/20"
-                       >
-                          <Play className="w-10 h-10 md:w-14 md:h-14 text-white fill-white ml-2" />
-                       </motion.div>
-                    </div>
-                 </div>
-              </div>
-              <p className="mt-8 text-white/40 font-black uppercase tracking-[0.4em] text-[10px] md:text-sm italic">ASSISTA AO VÍDEO E VEJA COMO FUNCIONA O ACESSO</p>
-            </div>
+          <FadeUp delay={0.15} className="max-w-3xl mx-auto px-4">
+            <p className="text-gray-300 text-sm md:text-2xl font-medium tracking-tight leading-relaxed">
+              Após a liberação, você recebe acesso ao painel organizado com transmissões, canais e conteúdos disponíveis para assistir online em qualquer dispositivo.
+            </p>
           </FadeUp>
 
           <FadeUp delay={0.2} className="space-y-10 w-full">
-            <p className="text-gray-300 text-sm md:text-2xl font-medium tracking-tight leading-relaxed max-w-3xl mx-auto px-6">
-              Assista Futebol, UFC, Basquete, F1 e muito mais de forma organizada. <br className="hidden md:block" /> Disponível quando você quiser, em qualquer dispositivo.
-            </p>
-            
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 pt-4 px-4 w-full max-w-md md:max-w-none mx-auto">
                <Button size="xl" icon={ArrowRight} onClick={() => scrollTo('planos')} className="shadow-[0_0_60px_rgba(57,255,20,0.4)] px-12 order-1 md:order-none">LIBERAR ACESSO AGORA</Button>
                <div className="flex flex-row md:flex-col items-center md:items-start justify-center gap-4 md:gap-2 text-left w-full md:w-auto order-2 md:order-none opacity-60">
@@ -363,45 +343,67 @@ export default function App() {
                  </div>
                </div>
             </div>
+
+            {/* Micro Bloco Como Funciona */}
+            <div className="max-w-4xl mx-auto pt-8 border-t border-white/5">
+              <p className="text-primary font-black uppercase tracking-[0.3em] text-[10px] md:text-xs mb-8 italic flex items-center justify-center gap-2">
+                <Zap className="w-4 h-4 fill-primary" /> Como funciona:
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-2">
+                {[
+                  { icon: Check, text: 'Escolha o plano' },
+                  { icon: Zap, text: 'Receba seu acesso imediatamente' },
+                  { icon: Smartphone, text: 'Acesse pelo celular, TV ou PC' },
+                  { icon: PlayCircle, text: 'Comece a assistir em minutos' }
+                ].map((step, i) => (
+                  <div key={i} className="flex flex-col items-center gap-3 p-4 rounded-3xl bg-white/[0.03] border border-white/5 group hover:bg-white/5 transition-colors">
+                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                      <step.icon className="w-4 h-4" />
+                    </div>
+                    <span className="text-[9px] md:text-xs font-black uppercase tracking-tighter text-white/60 leading-tight">{step.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </FadeUp>
         </div>
       </section>
 
       {/* Broadcasting Partners Carousel */}
       <div className="py-8 md:py-16 bg-black/40 border-y border-white/5 relative overflow-hidden backdrop-blur-sm">
-        <div className="flex whitespace-nowrap animate-marquee items-center gap-12 md:gap-32 px-10">
+        <div className="flex whitespace-nowrap animate-marquee items-center gap-12 md:gap-32 px-10 will-change-transform">
           {[
-            { name: 'Globo', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Rede_Globo_logo.svg/300px-Rede_Globo_logo.svg.png&w=400&output=png' },
-            { name: 'SBT', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/SBT_Logo.svg/300px-SBT_Logo.svg.png&w=400&output=png' },
-            { name: 'Globoplay', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Globoplay_logo.svg/300px-Globoplay_logo.svg.png&w=400&output=png' },
-            { name: 'Disney+', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_logo.svg/300px-Disney%2B_logo.svg.png&w=400&output=png' },
-            { name: 'Premiere', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/pt/thumb/d/d3/Premiere_logo.png/400px-Premiere_logo.png&w=400' },
-            { name: 'Cazé TV', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Caz%C3%A9TV-Horizontal-Logo.png/600px-Caz%C3%A9TV-Horizontal-Logo.png&w=600' },
-            { name: 'Band Sports', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/pt/thumb/1/10/Bandsports_logo.png/400px-Bandsports_logo.png&w=400' },
-            { name: 'Combate', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/pt/thumb/d/d4/Combate_logo.png/400px-Combate_logo.png&w=400' },
-            { name: 'Netflix', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/400px-Netflix_2015_logo.svg.png&w=400&output=png' },
-            { name: 'Paramount+', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Paramount_Plus.svg/400px-Paramount_Plus.svg.png&w=400&output=png' },
-            { name: 'Max', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Max_logo.svg/400px-Max_logo.svg.png&w=400&output=png' },
-            { name: 'ESPN', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/400px-ESPN_wordmark.svg.png&w=400&output=png' },
-            { name: 'TNT Sports', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/pt/thumb/3/3a/TNT_Sports_logo.png/400px-TNT_Sports_logo.png&w=400' },
+            { name: 'Globo', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Rede_Globo_logo.svg/300px-Rede_Globo_logo.svg.png&w=300&q=70&output=webp' },
+            { name: 'SBT', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/SBT_Logo.svg/300px-SBT_Logo.svg.png&w=300&q=70&output=webp' },
+            { name: 'Globoplay', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Globoplay_logo.svg/300px-Globoplay_logo.svg.png&w=300&q=70&output=webp' },
+            { name: 'Disney+', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_logo.svg/300px-Disney%2B_logo.svg.png&w=300&q=70&output=webp' },
+            { name: 'Premiere', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/pt/thumb/d/d3/Premiere_logo.png/400px-Premiere_logo.png&w=300&q=70&output=webp' },
+            { name: 'Cazé TV', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Caz%C3%A9TV-Horizontal-Logo.png/600px-Caz%C3%A9TV-Horizontal-Logo.png&w=500&q=70&output=webp' },
+            { name: 'Band Sports', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/pt/thumb/1/10/Bandsports_logo.png/400px-Bandsports_logo.png&w=300&q=70&output=webp' },
+            { name: 'Combate', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/pt/thumb/d/d4/Combate_logo.png/400px-Combate_logo.png&w=300&q=70&output=webp' },
+            { name: 'Netflix', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/400px-Netflix_2015_logo.svg.png&w=300&q=70&output=webp' },
+            { name: 'Paramount+', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Paramount_Plus.svg/400px-Paramount_Plus.svg.png&w=300&q=70&output=webp' },
+            { name: 'Max', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Max_logo.svg/400px-Max_logo.svg.png&w=300&q=70&output=webp' },
+            { name: 'ESPN', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/400px-ESPN_wordmark.svg.png&w=300&q=70&output=webp' },
+            { name: 'TNT Sports', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/pt/thumb/3/3a/TNT_Sports_logo.png/400px-TNT_Sports_logo.png&w=300&q=70&output=webp' },
           ].map((brand, i) => (
             <BrandLogo key={`brand-1-${i}`} brand={brand} />
           ))}
           {/* Repeat for Infinite Loop */}
           {[
-            { name: 'Globo', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Rede_Globo_logo.svg/300px-Rede_Globo_logo.svg.png&w=400&output=png' },
-            { name: 'SBT', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/SBT_Logo.svg/300px-SBT_Logo.svg.png&w=400&output=png' },
-            { name: 'Globoplay', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Globoplay_logo.svg/300px-Globoplay_logo.svg.png&w=400&output=png' },
-            { name: 'Disney+', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_logo.svg/300px-Disney%2B_logo.svg.png&w=400&output=png' },
-            { name: 'Premiere', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/pt/thumb/d/d3/Premiere_logo.png/400px-Premiere_logo.png&w=400' },
-            { name: 'Cazé TV', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Caz%C3%A9TV-Horizontal-Logo.png/600px-Caz%C3%A9TV-Horizontal-Logo.png&w=600' },
-            { name: 'Band Sports', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/pt/1/10/Bandsports_logo.png/400px-Bandsports_logo.png&w=400' },
-            { name: 'Combate', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/pt/d/d4/Combate_logo.png/400px-Combate_logo.png&w=400' },
-            { name: 'Netflix', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/400px-Netflix_2015_logo.svg.png&w=400&output=png' },
-            { name: 'Paramount+', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Paramount_Plus.svg/400px-Paramount_Plus.svg.png&w=400&output=png' },
-            { name: 'Max', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Max_logo.svg/400px-Max_logo.svg.png&w=400&output=png' },
-            { name: 'ESPN', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/400px-ESPN_wordmark.svg.png&w=400&output=png' },
-            { name: 'TNT Sports', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/pt/3/3a/TNT_Sports_logo.png/400px-TNT_Sports_logo.png&w=400' },
+            { name: 'Globo', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Rede_Globo_logo.svg/300px-Rede_Globo_logo.svg.png&w=300&q=70&output=webp' },
+            { name: 'SBT', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/SBT_Logo.svg/300px-SBT_Logo.svg.png&w=300&q=70&output=webp' },
+            { name: 'Globoplay', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Globoplay_logo.svg/300px-Globoplay_logo.svg.png&w=300&q=70&output=webp' },
+            { name: 'Disney+', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_logo.svg/300px-Disney%2B_logo.svg.png&w=300&q=70&output=webp' },
+            { name: 'Premiere', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/pt/thumb/d/d3/Premiere_logo.png/400px-Premiere_logo.png&w=300&q=70&output=webp' },
+            { name: 'Cazé TV', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Caz%C3%A9TV-Horizontal-Logo.png/600px-Caz%C3%A9TV-Horizontal-Logo.png&w=500&q=70&output=webp' },
+            { name: 'Band Sports', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/pt/1/10/Bandsports_logo.png/400px-Bandsports_logo.png&w=300&q=70&output=webp' },
+            { name: 'Combate', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/pt/d/d4/Combate_logo.png/400px-Combate_logo.png&w=300&q=70&output=webp' },
+            { name: 'Netflix', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/400px-Netflix_2015_logo.svg.png&w=300&q=70&output=webp' },
+            { name: 'Paramount+', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Paramount_Plus.svg/400px-Paramount_Plus.svg.png&w=300&q=70&output=webp' },
+            { name: 'Max', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Max_logo.svg/400px-Max_logo.svg.png&w=300&q=70&output=webp' },
+            { name: 'ESPN', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/ESPN_wordmark.svg/400px-ESPN_wordmark.svg.png&w=300&q=70&output=webp' },
+            { name: 'TNT Sports', url: 'https://wsrv.nl/?url=https://upload.wikimedia.org/wikipedia/pt/3/3a/TNT_Sports_logo.png/400px-TNT_Sports_logo.png&w=300&q=70&output=webp' },
           ].map((brand, i) => (
             <BrandLogo key={`brand-2-${i}`} brand={brand} />
           ))}
@@ -427,14 +429,14 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 max-w-5xl mx-auto">
             {[
-              { label: 'Brasileirão', sub: 'Série A & B 2026', img: 'https://i.ibb.co/XfzRGJs8/Brasileir-o.png' },
-              { label: 'Champions', sub: 'UEFA Champions League', img: 'https://i.ibb.co/d04PMxmy/UEFA-CHAMPIONS-LEAGUE.png' },
-              { label: 'Libertadores', sub: 'Conmebol Libertadores', img: 'https://i.ibb.co/sJkWbTJj/LIBERTADORES.png' },
-              { label: 'Premier League', sub: 'English Premier League', img: 'https://i.ibb.co/x8Hy3SKx/PREMIER-LEAGUE.png' },
-              { label: 'La Liga', sub: 'Spanish Football', img: 'https://i.ibb.co/ZR98YpXR/LALIGA.png' },
-              { label: 'Serie A', sub: 'Lega Serie A TIM', img: 'https://i.ibb.co/4ZyFck90/SERIA-A-ITALIANA.png' },
-              { label: 'NBA', sub: 'Todo o Jogo Ao Vivo', img: 'https://i.ibb.co/prNvkwKv/NBA.png' },
-              { label: 'UFC', sub: 'Todas as Lutas de Elite', img: 'https://i.ibb.co/LHwJKJX/UFC.png' },
+              { label: 'Brasileirão', sub: 'Série A & B 2026', img: 'https://wsrv.nl/?url=https://i.ibb.co/XfzRGJs8/Brasileir-o.png&w=400&output=webp' },
+              { label: 'Champions', sub: 'UEFA Champions League', img: 'https://wsrv.nl/?url=https://i.ibb.co/d04PMxmy/UEFA-CHAMPIONS-LEAGUE.png&w=400&output=webp' },
+              { label: 'Libertadores', sub: 'Conmebol Libertadores', img: 'https://wsrv.nl/?url=https://i.ibb.co/sJkWbTJj/LIBERTADORES.png&w=400&output=webp' },
+              { label: 'Premier League', sub: 'English Premier League', img: 'https://wsrv.nl/?url=https://i.ibb.co/x8Hy3SKx/PREMIER-LEAGUE.png&w=400&output=webp' },
+              { label: 'La Liga', sub: 'Spanish Football', img: 'https://wsrv.nl/?url=https://i.ibb.co/ZR98YpXR/LALIGA.png&w=400&output=webp' },
+              { label: 'Serie A', sub: 'Lega Serie A TIM', img: 'https://wsrv.nl/?url=https://i.ibb.co/4ZyFck90/SERIA-A-ITALIANA.png&w=400&output=webp' },
+              { label: 'NBA', sub: 'Todo o Jogo Ao Vivo', img: 'https://wsrv.nl/?url=https://i.ibb.co/prNvkwKv/NBA.png&w=400&output=webp' },
+              { label: 'UFC', sub: 'Todas as Lutas de Elite', img: 'https://wsrv.nl/?url=https://i.ibb.co/LHwJKJX/UFC.png&w=400&output=webp' },
               { label: 'Lançamentos', sub: 'Filmes 4K Recentes', icon: Clapperboard },
               { label: 'Temporadas', sub: 'Séries Completas HD', icon: Calendar },
             ].map((item, i) => (
@@ -460,35 +462,100 @@ export default function App() {
         </div>
       </section>
 
-      {/* TUDO ORGANIZADO */}
-      <section className="py-32 px-5 md:px-10 relative bg-tech-arena">
+      {/* VEJA COMO FUNCIONA O PAINEL */}
+      <section className="py-24 md:py-32 px-5 md:px-10 bg-black relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <FadeUp>
-              <Badge className="mb-6 border-white/20">PRATICIDADE TOTAL</Badge>
-              <h2 className="font-display text-4xl md:text-7xl font-black italic tracking-tighter uppercase text-white mb-6">
-                TUDO ORGANIZADO EM <span className="text-primary italic">UM SÓ LUGAR</span>
-              </h2>
-              <p className="text-gray-400 text-sm md:text-xl font-medium tracking-tight max-w-2xl mx-auto">
-                Sem grupos bagunçados. Sem listas confusas. Sem perder tempo procurando links.
-              </p>
-            </FadeUp>
-          </div>
+          <FadeUp className="text-center mb-16 md:mb-24">
+            <Badge className="mb-6 border-white/20">EXPERIÊNCIA PREMIUM</Badge>
+            <h2 className="font-display text-4xl md:text-7xl font-black italic tracking-tighter uppercase text-white mb-6">
+              VEJA COMO FUNCIONA <span className="text-primary italic">O PAINEL</span>
+            </h2>
+            <p className="text-white/40 font-medium text-sm md:text-xl max-w-2xl mx-auto">
+              Interface moderna, extremamente clean e organizada no estilo das maiores plataformas de streaming do mundo.
+            </p>
+          </FadeUp>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { title: 'Escolha o conteúdo', desc: 'Navegue por uma biblioteca organizada e intuitiva.', step: '01' },
-              { title: 'Clique para acessar', desc: 'Um clique e você já está assistindo o que escolheu.', step: '02' },
-              { title: 'Assista quando quiser', desc: 'Estabilidade garantida em qualquer plataforma.', step: '03' }
-            ].map((item, i) => (
-              <FadeUp key={i} delay={i * 0.1}>
-                <div className="bg-white/[0.02] border border-white/5 p-10 rounded-[2.5rem] relative overflow-hidden group hover:border-primary/30 transition-all">
-                  <span className="absolute -right-4 -top-4 text-9xl font-black italic text-white/[0.03] group-hover:text-primary/5 transition-colors">{item.step}</span>
-                  <div className="relative z-10">
-                    <h3 className="text-xl md:text-2xl font-black uppercase italic text-white mb-4 tracking-tighter">{item.title}</h3>
-                    <p className="text-white/40 font-medium leading-relaxed">{item.desc}</p>
-                  </div>
+          <FadeUp delay={0.2}>
+             <div className="relative max-w-5xl mx-auto">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-primary/5 to-primary/20 blur-2xl opacity-50"></div>
+                <div className="relative bg-[#141414] rounded-[2rem] md:rounded-[3.5rem] border border-white/10 overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.8)] aspect-[16/10] md:aspect-video flex flex-col">
+                   {/* Sidebar / Topbar Mockup */}
+                   <div className="h-12 md:h-20 border-b border-white/5 flex items-center justify-between px-6 md:px-10 bg-black/20">
+                      <div className="flex items-center gap-2 font-display text-lg md:text-2xl font-black italic">
+                        FUT<span className="text-primary"> PRÁTICO</span>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="w-6 h-6 md:w-10 md:h-10 rounded-full bg-white/5" />
+                        <div className="w-6 h-6 md:w-10 md:h-10 rounded-full bg-primary" />
+                      </div>
+                   </div>
+
+                   {/* Content Mockup */}
+                   <div className="flex-1 p-6 md:p-12 overflow-y-auto">
+                      <div className="space-y-12">
+                         {/* Categories Row */}
+                         <div className="flex gap-4 md:gap-8 overflow-x-auto pb-4 scrollbar-hide">
+                            {['Futebol', 'Filmes', 'Séries', 'UFC', 'NBA'].map((cat, i) => (
+                              <div key={i} className={`px-4 md:px-8 py-2 md:py-3 rounded-full border text-[10px] md:text-sm font-black uppercase tracking-widest whitespace-nowrap ${i === 0 ? 'bg-primary text-black border-primary' : 'bg-white/5 text-white/40 border-white/10'}`}>
+                                {cat}
+                              </div>
+                            ))}
+                         </div>
+
+                         {/* Category 1 */}
+                         <div className="space-y-6">
+                            <div className="flex items-center justify-between">
+                               <h3 className="text-xl md:text-3xl font-black italic uppercase tracking-tighter text-white/90">⚽ Programação do Dia</h3>
+                               <span className="text-primary text-[8px] md:text-xs font-black uppercase tracking-[0.2em] italic">VER TODOS</span>
+                            </div>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                               {[1, 2, 3, 4].map(i => (
+                                 <div key={i} className="aspect-[16/9] rounded-2xl bg-white/[0.03] border border-white/5 group relative overflow-hidden cursor-pointer">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                       <PlayCircle className="w-10 h-10 md:w-14 md:h-14 text-primary" />
+                                    </div>
+                                    <div className="absolute bottom-4 left-4 right-4">
+                                       <div className="w-1/2 h-2 rounded-full bg-primary/20 mb-2" />
+                                       <div className="w-3/4 h-2 rounded-full bg-white/10" />
+                                    </div>
+                                 </div>
+                               ))}
+                            </div>
+                         </div>
+                      </div>
+                   </div>
                 </div>
+             </div>
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* BLOCO DE COMPATIBILIDADE */}
+      <section className="py-24 md:py-32 px-5 md:px-10 bg-future-performance border-y border-white/5">
+        <div className="max-w-7xl mx-auto">
+          <FadeUp className="text-center mb-16 md:mb-20">
+            <h2 className="font-display text-4xl md:text-6xl font-black italic tracking-tighter uppercase text-white mb-6 leading-tight">
+              COMPATÍVEL COM PRATICAMENTE <br className="hidden md:block" /> <span className="text-primary italic">QUALQUER DISPOSITIVO</span>
+            </h2>
+            <p className="text-white/40 font-black uppercase tracking-widest text-[10px] md:text-sm">Assista onde quiser, quando quiser.</p>
+          </FadeUp>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-4 md:gap-8 justify-center">
+            {[
+              { icon: Smartphone, label: 'iPhone' },
+              { icon: Smartphone, label: 'Android' },
+              { icon: Tv, label: 'Smart TV' },
+              { icon: Zap, label: 'Fire Stick' },
+              { icon: Laptop, label: 'Notebook' },
+              { icon: Monitor, label: 'TV Box' },
+              { icon: Tablet, label: 'Tablet' },
+            ].map((device, i) => (
+              <FadeUp key={i} delay={i * 0.05} className="flex flex-col items-center gap-4 md:gap-6 group">
+                <div className="w-16 h-16 md:w-24 md:h-24 bg-white/5 rounded-[2rem] flex items-center justify-center text-white/40 border border-white/5 group-hover:bg-primary group-hover:text-black group-hover:border-primary transition-all duration-500 shadow-2xl group-hover:shadow-primary/20">
+                  <device.icon className="w-8 h-8 md:w-12 md:h-12" />
+                </div>
+                <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-white/20 group-hover:text-white transition-colors">{device.label}</span>
               </FadeUp>
             ))}
           </div>
@@ -511,13 +578,13 @@ export default function App() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 max-w-7xl mx-auto">
           {[
-            { title: 'ESTABILIDADE', desc: 'Transmissão otimizada que se adapta à sua conexão.' },
-            { title: 'QUALIDADE HD', desc: 'Sua programação favorita com imagem nítida e fluida.' },
-            { title: 'SEM ASSINATURA', desc: 'Liberdade absoluta. Use quando quiser e para sempre.' },
-            { title: 'SUPORTE VIP', desc: 'Equipe especializada disponível para auxiliar sua configuração.' },
+            { title: 'ESTABILIDADE', desc: 'Transmissão estável e otimizada que se adapta à sua conexão.' },
+            { title: 'IMAGEM FLUIDA', desc: 'Sua programação favorita com imagem nítida e sem travamentos.' },
+            { title: 'SEM ASSINATURA', desc: 'Experiência otimizada. Use quando quiser e para sempre.' },
+            { title: 'CARREGAMENTO RÁPIDO', desc: 'Tecnologia de ponta para você não perder nenhum segundo.' },
             { title: 'VARIEDADE', desc: 'Experiência completa com conteúdos nacionais e internacionais.' },
-            { title: 'PAINEL PRÓPRIO', desc: 'Layout intuitivo. Navegue como se estivesse na Netflix.' },
-            { title: 'GLOBAL', desc: 'Acesse conteúdos internacionais sem qualquer complicação.' },
+            { title: 'ORGANIZAÇÃO', desc: 'Layout intuitivo. Navegue como se estivesse em um app premium.' },
+            { title: 'ESTREIAS', desc: 'Acesse os últimos lançamentos de filmes e séries sem complicação.' },
             { title: 'ACESSO IMEDIATO', desc: 'Login simplificado. Configure e assista em poucos segundos.' },
           ].map((item, i) => (
             <FadeUp key={i} delay={i * 0.05} className="bg-white/5 p-12 rounded-[3rem] border border-white/5 hover:border-primary/30 transition-all group h-full hover:bg-primary/5">
@@ -746,31 +813,27 @@ export default function App() {
           <FadeUp className="bg-white/[0.02] border border-white/5 p-6 md:p-16 rounded-[2.5rem] md:rounded-[4rem]">
             <FAQItem 
               question="Tem jogo do meu time?" 
-              answer="Sim. A Fut Prático disponibiliza as transmissões de todos os clubes brasileiros das séries A, B e C. Se houver transmissão oficial, você terá acesso imediato."
+              answer="Trabalhamos com uma ampla variedade de transmissões nacionais e internacionais atualizadas constantemente."
             />
             <FAQItem 
               question="Funciona no iPhone e Android?" 
-              answer="Sim! Nossa plataforma é totalmente responsiva e possui aplicativos dedicados e leves para ambos os sistemas operacionais."
+              answer="Sim. Você pode acessar normalmente pelo iPhone, Android, tablet ou computador."
             />
             <FAQItem 
               question="Posso assistir na Smart TV?" 
-              answer="O acesso premium funciona perfeitamente em qualquer Smart TV (Samsung, LG, Sony, etc), seja pelo aplicativo nativo ou por Android TV, Fire Stick e TV Box."
+              answer="Sim. Compatível com Smart TVs, TV Box, Fire Stick e outros dispositivos."
             />
             <FAQItem 
               question="Como o acesso é liberado?" 
-              answer="No momento em que seu pagamento é confirmado (PIX é instantâneo), nossa central envia seus dados de acesso automaticamente para o seu WhatsApp e para o seu E-mail."
+              answer="Após o pagamento, você recebe imediatamente as instruções e dados de acesso."
             />
             <FAQItem 
               question="Tem realmente filmes e séries?" 
-              answer="Sim! Além de todo o conteúdo de esportes ao vivo, você ganha acesso a uma biblioteca gigantesca com os últimos lançamentos do cinema e as séries mais famosas de todos os streamings."
-            />
-            <FAQItem 
-              question="O pagamento é parcelado?" 
-              answer="O valor é uma taxa única de ativação vitalícia. Você paga uma única vez e garante seu acesso para sempre, sem cobranças mensais ou surpresas no cartão."
+              answer="Sim. Além dos esportes, você também terá acesso a filmes, séries e conteúdos variados."
             />
             <FAQItem 
               question="Como funciona o suporte?" 
-              answer="Temos uma equipe de suporte real no WhatsApp, disponível em todos os horários de jogos importantes para garantir que sua experiência seja perfeita."
+              answer="Nossa equipe está disponível para auxiliar na configuração e utilização da plataforma."
             />
           </FadeUp>
         </div>

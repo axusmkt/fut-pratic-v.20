@@ -51,7 +51,7 @@
 /* Section Specific Backgrounds */
 .bg-hero-stadium {
   background-image: linear-gradient(to bottom, rgba(5, 5, 5, 0.7), rgba(5, 5, 5, 1)), 
-                    url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=70&w=1400&auto=format&fit=crop');
+                    url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=60&w=1000&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -59,22 +59,27 @@
 
 .bg-streaming-stadium {
   background-image: linear-gradient(to bottom, rgba(5, 5, 5, 0.92), rgba(5, 5, 5, 0.95)), 
-                    url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=70&w=1400&auto=format&fit=crop');
+                    url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=60&w=1000&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+}
+
+@media (min-width: 1024px) {
+  .bg-streaming-stadium {
+    background-attachment: fixed;
+  }
 }
 
 .bg-tech-arena {
   background-image: linear-gradient(to bottom, rgba(5, 5, 5, 0.85), rgba(5, 5, 5, 0.95)), 
-                    url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=70&w=1200&auto=format&fit=crop');
+                    url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=60&w=1000&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
 }
 
 .bg-future-performance {
   background-image: linear-gradient(to bottom, rgba(5, 5, 5, 0.9), rgba(5, 5, 5, 1)), 
-                    url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=70&w=1200&auto=format&fit=crop');
+                    url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=60&w=1000&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
 }
@@ -86,10 +91,15 @@
 
 .bg-pricing-cinematic {
   background-image: linear-gradient(to bottom, rgba(5, 5, 5, 0.95), #050505), 
-                    url('https://images.unsplash.com/photo-1518091044124-0101b02e54f7?q=70&w=1400&auto=format&fit=crop');
+                    url('https://images.unsplash.com/photo-1518091044124-0101b02e54f7?q=60&w=1000&auto=format&fit=crop');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+}
+
+@media (min-width: 1024px) {
+  .bg-pricing-cinematic {
+    background-attachment: fixed;
+  }
 }
 
 .premium-gradient-text {

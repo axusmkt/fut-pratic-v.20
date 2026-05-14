@@ -71,18 +71,18 @@ const Button = ({
 
 const FadeUp = ({ children, delay = 0, className = "" }: any) => (
   <motion.div
-    initial={{ opacity: 0, y: 30 }}
+    initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-50px" }}
-    transition={{ duration: 0.8, delay, ease: [0.21, 1.11, 0.81, 0.99] }}
-    className={`will-change-transform ${className}`}
+    viewport={{ once: true, margin: "-20px" }}
+    transition={{ duration: 0.6, delay, ease: "easeOut" }}
+    className={className}
   >
     {children}
   </motion.div>
 );
 
 const Badge = ({ children, className = "" }: any) => (
-  <div className={`inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-3 py-1 md:px-4 md:py-1.5 text-[8px] md:text-xs font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-white/60 will-change-transform ${className}`}>
+  <div className={`inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-3 py-1 md:px-4 md:py-1.5 text-[8px] md:text-xs font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-white/60 ${className}`}>
     {children}
   </div>
 );
@@ -165,6 +165,7 @@ const CategoryCard = ({ label, sub, img, icon: Icon, delay }: any) => {
                   className={`max-w-full max-h-full object-contain transition-all duration-500 group-hover:scale-110 ${imageLoading ? 'opacity-0' : 'opacity-100'}`}
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  decoding="async"
                   onLoad={() => setImageLoading(false)}
                   onError={() => {
                     setImageError(true);
@@ -318,30 +319,85 @@ export default function App() {
           </FadeUp>
 
           <FadeUp delay={0.1}>
-            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[11rem] font-black leading-[1.1] tracking-tighter italic uppercase text-white px-2 mb-2 py-4">
-              <span className="text-primary italic">+1500 Canais e</span> <br />
-              <span className="premium-gradient-text">Conteúdos</span> <br />
-              <span className="opacity-30">Disponíveis</span>
+            <h1 className="font-display text-4xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-black leading-[1.1] tracking-tighter italic uppercase text-white px-2 mb-6 py-4 overflow-visible">
+              Receba acesso imediato ao <span className="text-primary italic">painel</span> com <span className="premium-gradient-text">+1500 conteúdos</span> organizados
             </h1>
           </FadeUp>
 
-          <FadeUp delay={0.15} className="max-w-3xl mx-auto px-4">
-            <p className="text-gray-300 text-sm md:text-2xl font-medium tracking-tight leading-relaxed">
-              Após a liberação, você recebe acesso ao painel organizado com transmissões, canais e conteúdos disponíveis para assistir online em qualquer dispositivo.
+          <FadeUp delay={0.15} className="max-w-4xl mx-auto px-4">
+            <p className="text-gray-300 text-base md:text-3xl font-medium tracking-tight leading-relaxed mb-8">
+              Tudo organizado em um único painel premium. Futebol ao vivo, UFC, NBA, filmes e séries disponíveis instantaneamente em qualquer dispositivo.
             </p>
+            <div className="flex flex-wrap justify-center gap-3 md:gap-6 mb-12">
+              {[
+                'Liberação automática após pagamento',
+                'Sem mensalidades',
+                'Compatível com qualquer dispositivo',
+                'Acesso simplificado'
+              ].map((text, i) => (
+                <div key={i} className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-[8px] md:text-sm font-black uppercase tracking-widest text-white/80 italic">
+                  <CheckCircle2 className="w-3 h-3 md:w-5 md:h-5 text-primary" /> {text}
+                </div>
+              ))}
+            </div>
           </FadeUp>
 
-          <FadeUp delay={0.2} className="space-y-10 w-full">
+          <FadeUp delay={0.2} className="space-y-12 w-full">
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 pt-4 px-4 w-full max-w-md md:max-w-none mx-auto">
-               <Button size="xl" icon={ArrowRight} onClick={() => scrollTo('planos')} className="shadow-[0_0_60px_rgba(57,255,20,0.4)] px-12 order-1 md:order-none">LIBERAR ACESSO AGORA</Button>
-               <div className="flex flex-row md:flex-col items-center md:items-start justify-center gap-4 md:gap-2 text-left w-full md:w-auto order-2 md:order-none opacity-60">
-                 <div className="flex items-center gap-2 text-[8px] md:text-[10px] font-black uppercase tracking-widest text-white/80 italic">
-                   <ShieldCheck className="w-3 h-3 md:w-5 md:h-5 text-primary" /> ACESSO IMEDIATO
-                 </div>
-                 <div className="flex items-center gap-2 text-[8px] md:text-[10px] font-black uppercase tracking-widest text-white/80 italic">
-                   <Zap className="w-3 h-3 md:w-5 md:h-5 text-primary" /> SEM MENSALIDADES
-                 </div>
+               <Button size="xl" icon={ArrowRight} onClick={() => scrollTo('planos')} className="shadow-[0_0_60px_rgba(57,255,20,0.4)] px-12 order-1 md:order-none">LIBERAR ACESSO IMEDIATO</Button>
+               <div className="flex items-center gap-4 opacity-40">
+                  <div className="flex items-center gap-2 text-[8px] md:text-xs font-black uppercase tracking-widest">
+                    <ShieldCheck className="w-4 h-4 text-primary" /> PAGAMENTO SEGURO
+                  </div>
+                  <div className="w-1 h-1 bg-white/20 rounded-full" />
+                  <div className="flex items-center gap-2 text-[8px] md:text-xs font-black uppercase tracking-widest">
+                    <Zap className="w-4 h-4 text-primary" /> LOGIN NA HORA
+                  </div>
                </div>
+            </div>
+
+            {/* Mockup Imediato no Hero */}
+            <div className="relative max-w-5xl mx-auto mt-20">
+               <div className="absolute -inset-1 bg-primary/20 blur-3xl opacity-30"></div>
+               <div className="relative group perspective-1000">
+                  <motion.div 
+                    whileHover={{ rotateX: 2, rotateY: -2 }}
+                    className="relative bg-[#141414] rounded-[2rem] md:rounded-[3rem] border border-white/10 overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.8)] aspect-[16/10] md:aspect-video flex flex-col"
+                  >
+                     <div className="h-10 md:h-16 border-b border-white/5 flex items-center justify-between px-6 md:px-8 bg-black/40">
+                        <div className="flex items-center gap-2 font-display text-base md:text-xl font-black italic">
+                          FUT<span className="text-primary"> PRÁTICO</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <div className="w-24 md:w-40 h-2 bg-white/5 rounded-full" />
+                          <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-primary shadow-[0_0_15px_rgba(57,255,20,0.5)]" />
+                        </div>
+                     </div>
+                     <div className="flex-1 p-6 md:p-10 space-y-8 overflow-hidden">
+                        <div className="flex gap-3 md:gap-6 overflow-x-auto pb-4">
+                           {['Futebol Ao Vivo', 'UFC', 'Filmes', 'Séries'].map((cat, i) => (
+                             <div key={i} className={`px-4 md:px-6 py-2 rounded-full border text-[8px] md:text-xs font-black uppercase tracking-widest ${i === 0 ? 'bg-primary text-black border-primary' : 'bg-white/5 text-white/40 border-white/10'}`}>
+                               {cat}
+                             </div>
+                           ))}
+                        </div>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                           {[1, 2, 3].map(i => (
+                             <div key={i} className="aspect-video rounded-xl bg-white/[0.03] border border-white/5 relative overflow-hidden group/item">
+                                <div className="absolute inset-0 flex items-center justify-center opacity-40 group-hover/item:opacity-100 transition-opacity">
+                                   <PlayCircle className="w-10 h-10 text-primary" />
+                                </div>
+                                <div className="absolute bottom-3 left-3 right-3">
+                                   <div className="w-1/2 h-1.5 bg-primary/20 rounded-full mb-1" />
+                                   <div className="w-3/4 h-1.5 bg-white/10 rounded-full" />
+                                </div>
+                             </div>
+                           ))}
+                        </div>
+                     </div>
+                  </motion.div>
+               </div>
+               <p className="mt-8 text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-xs italic animate-pulse">▲ VISUALIZAÇÃO REAL DO PAINEL PREMIUM</p>
             </div>
 
             {/* Micro Bloco Como Funciona */}
@@ -366,6 +422,40 @@ export default function App() {
               </div>
             </div>
           </FadeUp>
+        </div>
+      </section>
+
+      {/* TÃO SIMPLES QUE QUALQUER PESSOA CONSEGUE USAR */}
+      <section className="py-24 md:py-32 px-5 md:px-10 bg-dark-bg relative">
+        <div className="max-w-7xl mx-auto">
+          <FadeUp className="text-center mb-16 md:mb-24">
+            <Badge className="mb-6 border-white/20">PRATICIDADE TOTAL</Badge>
+            <h2 className="font-display text-4xl md:text-7xl font-black italic tracking-tighter uppercase text-white mb-6">
+              TÃO SIMPLES QUE <span className="text-primary italic">QUALQUER PESSOA</span> CONSEGUE USAR
+            </h2>
+            <p className="text-white/40 font-medium text-sm md:text-xl max-w-2xl mx-auto">
+              Sem configurações chatas. Sem precisar instalar nada complicado. Tudo pronto para o seu entretenimento.
+            </p>
+          </FadeUp>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
+            {[
+              { step: '01', title: 'Escolha o conteúdo', desc: 'Navegue pelas categorias organizadas e encontre seu jogo ou filme em segundos.' },
+              { step: '02', title: 'Clique em acessar', desc: 'Um toque no botão e o sistema carrega instantaneamente para você assistir.' },
+              { step: '03', title: 'Assista imediatamente', desc: 'Pronto! Já pode curtir sua programação em 4K sem travamentos.' }
+            ].map((item, i) => (
+              <FadeUp key={i} delay={i * 0.1} className="relative group">
+                <div className="bg-white/[0.02] border border-white/5 p-12 rounded-[3.5rem] md:rounded-[4rem] h-full transition-all group-hover:bg-primary/5 group-hover:border-primary/20">
+                  <span className="text-9xl font-black italic text-white/[0.02] absolute -top-10 -left-4 group-hover:text-primary/5 transition-colors">{item.step}</span>
+                  <div className="relative z-10 text-center md:text-left">
+                    <h3 className="text-2xl md:text-3xl font-black uppercase italic tracking-tighter text-white mb-4 leading-none">{item.title}</h3>
+                    <p className="text-white/40 font-bold uppercase tracking-tighter text-xs md:text-base">{item.desc}</p>
+                  </div>
+                </div>
+              </FadeUp>
+            ))}
+          </div>
+
         </div>
       </section>
 
@@ -429,14 +519,14 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 max-w-5xl mx-auto">
             {[
-              { label: 'Brasileirão', sub: 'Série A & B 2026', img: 'https://wsrv.nl/?url=https://i.ibb.co/XfzRGJs8/Brasileir-o.png&w=400&output=webp' },
-              { label: 'Champions', sub: 'UEFA Champions League', img: 'https://wsrv.nl/?url=https://i.ibb.co/d04PMxmy/UEFA-CHAMPIONS-LEAGUE.png&w=400&output=webp' },
-              { label: 'Libertadores', sub: 'Conmebol Libertadores', img: 'https://wsrv.nl/?url=https://i.ibb.co/sJkWbTJj/LIBERTADORES.png&w=400&output=webp' },
-              { label: 'Premier League', sub: 'English Premier League', img: 'https://wsrv.nl/?url=https://i.ibb.co/x8Hy3SKx/PREMIER-LEAGUE.png&w=400&output=webp' },
-              { label: 'La Liga', sub: 'Spanish Football', img: 'https://wsrv.nl/?url=https://i.ibb.co/ZR98YpXR/LALIGA.png&w=400&output=webp' },
-              { label: 'Serie A', sub: 'Lega Serie A TIM', img: 'https://wsrv.nl/?url=https://i.ibb.co/4ZyFck90/SERIA-A-ITALIANA.png&w=400&output=webp' },
-              { label: 'NBA', sub: 'Todo o Jogo Ao Vivo', img: 'https://wsrv.nl/?url=https://i.ibb.co/prNvkwKv/NBA.png&w=400&output=webp' },
-              { label: 'UFC', sub: 'Todas as Lutas de Elite', img: 'https://wsrv.nl/?url=https://i.ibb.co/LHwJKJX/UFC.png&w=400&output=webp' },
+              { label: 'Brasileirão', sub: 'Série A & B 2026', img: 'https://wsrv.nl/?url=https://i.ibb.co/XfzRGJs8/Brasileir-o.png&w=300&output=webp&q=70' },
+              { label: 'Champions', sub: 'UEFA Champions League', img: 'https://wsrv.nl/?url=https://i.ibb.co/d04PMxmy/UEFA-CHAMPIONS-LEAGUE.png&w=300&output=webp&q=70' },
+              { label: 'Libertadores', sub: 'Conmebol Libertadores', img: 'https://wsrv.nl/?url=https://i.ibb.co/sJkWbTJj/LIBERTADORES.png&w=300&output=webp&q=70' },
+              { label: 'Premier League', sub: 'English Premier League', img: 'https://wsrv.nl/?url=https://i.ibb.co/x8Hy3SKx/PREMIER-LEAGUE.png&w=300&output=webp&q=70' },
+              { label: 'La Liga', sub: 'Spanish Football', img: 'https://wsrv.nl/?url=https://i.ibb.co/ZR98YpXR/LALIGA.png&w=300&output=webp&q=70' },
+              { label: 'Serie A', sub: 'Lega Serie A TIM', img: 'https://wsrv.nl/?url=https://i.ibb.co/4ZyFck90/SERIA-A-ITALIANA.png&w=300&output=webp&q=70' },
+              { label: 'NBA', sub: 'Todo o Jogo Ao Vivo', img: 'https://wsrv.nl/?url=https://i.ibb.co/prNvkwKv/NBA.png&w=300&output=webp&q=70' },
+              { label: 'UFC', sub: 'Todas as Lutas de Elite', img: 'https://wsrv.nl/?url=https://i.ibb.co/LHwJKJX/UFC.png&w=300&output=webp&q=70' },
               { label: 'Lançamentos', sub: 'Filmes 4K Recentes', icon: Clapperboard },
               { label: 'Temporadas', sub: 'Séries Completas HD', icon: Calendar },
             ].map((item, i) => (
@@ -457,75 +547,6 @@ export default function App() {
                    <p className="text-white/50 text-sm md:text-lg font-bold">Conteúdo 100% organizado e disponível 24h.</p>
                 </div>
                 <Button size="lg" className="md:w-auto w-full" onClick={() => scrollTo('planos')}>LIBERAR TUDO</Button>
-             </div>
-          </FadeUp>
-        </div>
-      </section>
-
-      {/* VEJA COMO FUNCIONA O PAINEL */}
-      <section className="py-24 md:py-32 px-5 md:px-10 bg-black relative overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <FadeUp className="text-center mb-16 md:mb-24">
-            <Badge className="mb-6 border-white/20">EXPERIÊNCIA PREMIUM</Badge>
-            <h2 className="font-display text-4xl md:text-7xl font-black italic tracking-tighter uppercase text-white mb-6">
-              VEJA COMO FUNCIONA <span className="text-primary italic">O PAINEL</span>
-            </h2>
-            <p className="text-white/40 font-medium text-sm md:text-xl max-w-2xl mx-auto">
-              Interface moderna, extremamente clean e organizada no estilo das maiores plataformas de streaming do mundo.
-            </p>
-          </FadeUp>
-
-          <FadeUp delay={0.2}>
-             <div className="relative max-w-5xl mx-auto">
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-primary/5 to-primary/20 blur-2xl opacity-50"></div>
-                <div className="relative bg-[#141414] rounded-[2rem] md:rounded-[3.5rem] border border-white/10 overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.8)] aspect-[16/10] md:aspect-video flex flex-col">
-                   {/* Sidebar / Topbar Mockup */}
-                   <div className="h-12 md:h-20 border-b border-white/5 flex items-center justify-between px-6 md:px-10 bg-black/20">
-                      <div className="flex items-center gap-2 font-display text-lg md:text-2xl font-black italic">
-                        FUT<span className="text-primary"> PRÁTICO</span>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <div className="w-6 h-6 md:w-10 md:h-10 rounded-full bg-white/5" />
-                        <div className="w-6 h-6 md:w-10 md:h-10 rounded-full bg-primary" />
-                      </div>
-                   </div>
-
-                   {/* Content Mockup */}
-                   <div className="flex-1 p-6 md:p-12 overflow-y-auto">
-                      <div className="space-y-12">
-                         {/* Categories Row */}
-                         <div className="flex gap-4 md:gap-8 overflow-x-auto pb-4 scrollbar-hide">
-                            {['Futebol', 'Filmes', 'Séries', 'UFC', 'NBA'].map((cat, i) => (
-                              <div key={i} className={`px-4 md:px-8 py-2 md:py-3 rounded-full border text-[10px] md:text-sm font-black uppercase tracking-widest whitespace-nowrap ${i === 0 ? 'bg-primary text-black border-primary' : 'bg-white/5 text-white/40 border-white/10'}`}>
-                                {cat}
-                              </div>
-                            ))}
-                         </div>
-
-                         {/* Category 1 */}
-                         <div className="space-y-6">
-                            <div className="flex items-center justify-between">
-                               <h3 className="text-xl md:text-3xl font-black italic uppercase tracking-tighter text-white/90">⚽ Programação do Dia</h3>
-                               <span className="text-primary text-[8px] md:text-xs font-black uppercase tracking-[0.2em] italic">VER TODOS</span>
-                            </div>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                               {[1, 2, 3, 4].map(i => (
-                                 <div key={i} className="aspect-[16/9] rounded-2xl bg-white/[0.03] border border-white/5 group relative overflow-hidden cursor-pointer">
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                       <PlayCircle className="w-10 h-10 md:w-14 md:h-14 text-primary" />
-                                    </div>
-                                    <div className="absolute bottom-4 left-4 right-4">
-                                       <div className="w-1/2 h-2 rounded-full bg-primary/20 mb-2" />
-                                       <div className="w-3/4 h-2 rounded-full bg-white/10" />
-                                    </div>
-                                 </div>
-                               ))}
-                            </div>
-                         </div>
-                      </div>
-                   </div>
-                </div>
              </div>
           </FadeUp>
         </div>
@@ -698,79 +719,140 @@ export default function App() {
             <p className="text-white/40 font-medium tracking-tight text-sm md:text-lg italic">Selecione o acesso ideal para o seu perfil e comece a assistir agora.</p>
           </FadeUp>
 
+          <div className="max-w-4xl mx-auto mb-12">
+            <FadeUp>
+              <div className="bg-primary/10 border border-primary/20 rounded-[2rem] p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="flex items-center gap-4">
+                  <div className="relative">
+                    <div className="w-12 h-12 bg-primary rounded-full animate-ping absolute opacity-20" />
+                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center relative">
+                      <Zap className="text-black w-6 h-6 fill-black" />
+                    </div>
+                  </div>
+                  <div className="text-left">
+                    <p className="text-primary font-black uppercase tracking-tighter text-sm md:text-xl italic">Liberação imediata disponível</p>
+                    <p className="text-white/40 text-[10px] md:text-xs font-bold uppercase tracking-widest leading-none">Últimas 12 ativações nos últimos 5 minutos</p>
+                  </div>
+                </div>
+                <div className="w-full md:w-64 space-y-2">
+                  <div className="flex justify-between items-end">
+                    <span className="text-[10px] font-black uppercase text-primary">Vagas Restantes</span>
+                    <span className="text-xs font-black">94%</span>
+                  </div>
+                  <div className="h-2 bg-white/5 rounded-full overflow-hidden border border-white/5">
+                    <motion.div 
+                      initial={{ width: '0%' }}
+                      whileInView={{ width: '94%' }}
+                      transition={{ duration: 2, ease: "easeOut" }}
+                      className="h-full bg-primary" />
+                  </div>
+                </div>
+              </div>
+            </FadeUp>
+          </div>
+
+          <div className="max-w-4xl mx-auto mb-16 md:mb-24">
+            <div className="glass-card bg-primary/5 border-primary/20 p-8 md:p-12 rounded-[2.5rem] md:rounded-[4rem] text-center border-dashed">
+               <h3 className="text-primary font-black uppercase tracking-widest text-[10px] md:text-sm mb-6 italic">O QUE VOCÊ RECEBE APÓS O PAGAMENTO</h3>
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-x-12 md:gap-y-6 text-left">
+                 {[
+                   'Login e Senha Imediatos',
+                   'Acesso ao Painel Premium',
+                   'Compatibilidade com Tudo',
+                   'Tutorial Simples de Acesso',
+                   'Suporte Prioritário 24h',
+                   'Liberação Automática'
+                 ].map((item, i) => (
+                   <div key={i} className="flex items-center gap-4 text-white font-black uppercase tracking-tighter text-xs md:text-xl italic">
+                     <CheckCircle2 className="w-5 h-5 md:w-8 md:h-8 text-primary shadow-primary" /> {item}
+                   </div>
+                 ))}
+               </div>
+            </div>
+            <p className="mt-8 text-center text-white/60 font-black italic uppercase tracking-tighter text-sm md:text-xl border-l-4 border-primary pl-4 md:pl-0 md:border-l-0">
+               “A maioria escolhe o <span className="text-primary">Plano Completo</span> para evitar limitações e desbloquear toda a experiência da plataforma.”
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto items-stretch">
-            {/* ACESSO ESSENCIAL */}
-            <FadeUp className="glass-card group p-10 md:p-20 rounded-[3rem] md:rounded-[5rem] border-white/5 flex flex-col justify-between relative overflow-hidden transition-all hover:bg-white/[0.03]">
+            {/* PLANO BÁSICO - R$10 */}
+            <FadeUp className="glass-card group p-10 md:p-16 rounded-[3rem] md:rounded-[4rem] border-white/5 flex flex-col justify-between relative overflow-hidden transition-all hover:bg-white/[0.01] opacity-70">
               <div className="mb-12">
-                <div className="flex items-center gap-3 mb-12">
-                  <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter italic text-white/80 group-hover:text-white transition-colors leading-none">Acesso <br /> Essencial</h3>
+                <div className="flex items-center gap-3 mb-8">
+                  <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tighter italic text-white/50 leading-none">Plano <br /> Lite</h3>
                 </div>
-                <div className="flex items-baseline gap-2 mb-10 md:mb-16 px-2">
-                   <span className="text-2xl md:text-4xl font-bold opacity-30">R$</span>
-                   <span className="text-8xl md:text-[12rem] font-black leading-none tracking-tighter italic text-white/20">10</span>
-                   <span className="text-white/10 font-bold uppercase text-[8px] md:text-xs tracking-widest leading-none">/único</span>
+                <div className="flex items-baseline gap-2 mb-10 px-2 opacity-50">
+                   <span className="text-xl md:text-3xl font-bold">R$</span>
+                   <span className="text-7xl md:text-9xl font-black leading-none tracking-tighter italic">10</span>
                 </div>
-                <div className="space-y-6 md:space-y-8">
+                <p className="text-white/20 font-black uppercase tracking-widest text-[9px] mb-8 italic">Versão básica para acesso inicial</p>
+                <div className="space-y-4">
                   {[
-                    'Acesso para 1 Smartphone',
-                    'Principais Ligas Nacionais',
-                    'Programação Variada',
-                    'Suporte via Telegram',
-                    'Liberação em 15-20min',
-                    'Sem cobranças mensais'
+                    { text: 'Acesso para 1 Smartphone', ok: true },
+                    { text: 'Catálogo Reduzido', ok: true },
+                    { text: 'Apenas Ligas Nacionais', ok: true },
+                    { text: 'Sem Smart TV', ok: false },
+                    { text: 'Sem Estabilidade Premium', ok: false },
+                    { text: 'Sem Canais Internacionais', ok: false },
+                    { text: 'Sem Suporte Prioritário', ok: false }
                   ].map((benefit, i) => (
-                    <div key={i} className="flex items-center gap-5 text-white/30 text-xs md:text-sm font-black uppercase tracking-tighter group-hover:text-white/60 transition-colors italic">
-                       <Check className="w-5 h-5 text-white/10 group-hover:text-white/30" /> {benefit}
+                    <div key={i} className={`flex items-center gap-4 text-[10px] md:text-sm font-black uppercase tracking-tighter italic ${benefit.ok ? 'text-white/30' : 'text-red-500/40'}`}>
+                       {benefit.ok ? <Check className="w-4 h-4" /> : <X className="w-4 h-4" />} {benefit.text}
                     </div>
                   ))}
                 </div>
               </div>
-              <Button variant="outline" size="xl" className="w-full !rounded-3xl" onClick={() => window.location.href = 'https://ggcheckout.app/checkout/v5/I23HQvG5UNZdAiumbSgN'}>COMEÇAR AGORA</Button>
+              <Button variant="outline" size="xl" className="w-full !rounded-2xl opacity-50" onClick={() => window.location.href = 'https://ggcheckout.app/checkout/v5/I23HQvG5UNZdAiumbSgN'}>PEGAR BÁSICO</Button>
             </FadeUp>
 
-            {/* ACESSO TOTAL */}
-            <FadeUp delay={0.1} className="glass-card p-8 md:p-20 rounded-[3rem] md:rounded-[5rem] border-primary/40 bg-primary/10 ring-8 ring-primary/5 shadow-[0_0_120px_rgba(57,255,20,0.2)] flex flex-col justify-between relative overflow-hidden">
-              <div className="absolute top-10 right-[-65px] rotate-45 bg-primary text-black font-black text-[10px] md:text-xs px-24 py-3 uppercase tracking-tighter z-10 shadow-2xl">
-                O MAIS VENDIDO 🔥
+            {/* PLANO COMPLETO - R$27 */}
+            <FadeUp delay={0.1} className="glass-card p-10 md:p-20 rounded-[3rem] md:rounded-[5rem] border-primary bg-primary/20 ring-8 ring-primary/10 shadow-[0_40px_150px_rgba(57,255,20,0.3)] flex flex-col justify-between relative overflow-hidden scale-105 z-20">
+              <div className="absolute top-10 right-[-65px] rotate-45 bg-primary text-black font-black text-[10px] md:text-sm px-24 py-3 uppercase tracking-tighter z-10 shadow-2xl">
+                O MAIS ESCOLHIDO 🔥
               </div>
               
               <div className="mb-8 md:mb-12">
-                <div className="flex items-center gap-4 mb-8 md:mb-12">
-                  <h3 className="text-3xl md:text-6xl font-black uppercase tracking-tighter italic leading-none">Acesso <br /> Total</h3>
-                  <Zap className="w-10 h-10 md:w-16 md:h-16 text-primary fill-primary animate-pulse" />
+                <div className="flex items-center gap-4 mb-4">
+                  <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter italic leading-none text-white">PLANO <br /> COMPLETO</h3>
+                  <Zap className="w-10 h-10 md:w-20 md:h-20 text-primary fill-primary animate-pulse" />
                 </div>
-                <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-10 mb-8 md:mb-16">
+                <p className="text-primary font-black uppercase tracking-widest text-xs md:text-base mb-12 italic">O acesso mais completo da plataforma.</p>
+
+                <div className="flex flex-col lg:flex-row items-center justify-center gap-6 mb-12 bg-black/40 p-10 rounded-[3rem] border border-white/5 relative">
                    <div className="flex items-center gap-2">
-                      <span className="text-3xl md:text-5xl font-extrabold text-primary leading-none">R$</span>
-                      <span className="text-8xl md:text-[13rem] lg:text-[15rem] font-black leading-none text-primary italic tracking-tighter drop-shadow-2xl">27</span>
+                      <span className="text-4xl md:text-5xl font-extrabold text-primary">R$</span>
+                      <span className="text-8xl md:text-[14rem] font-black text-primary italic tracking-tighter drop-shadow-[0_0_30px_rgba(57,255,20,0.4)]">27</span>
                    </div>
-                   <div className="flex flex-col items-center lg:items-start gap-2 h-auto text-center lg:text-left">
-                      <div className="flex flex-col items-center lg:items-start">
-                        <span className="text-primary font-black uppercase text-xs md:text-base tracking-[0.2em] leading-none whitespace-nowrap">ACESSO VITALÍCIO</span>
-                        <span className="text-white/40 text-[8px] md:text-xs uppercase tracking-widest mt-1">SEM MENSALIDADES</span>
-                      </div>
-                      <div className="bg-primary px-4 md:px-6 py-2 md:py-2.5 rounded-full shadow-[0_0_30px_rgba(57,255,20,0.4)] border border-white/20">
-                        <span className="text-black font-black uppercase text-[8px] md:text-sm tracking-widest leading-none block whitespace-nowrap">PAGAMENTO ÚNICO</span>
-                      </div>
+                   <div className="flex flex-col items-center lg:items-start">
+                      <span className="text-primary font-black uppercase text-xs md:text-base tracking-[0.2em]">PAGAMENTO ÚNICO</span>
+                      <span className="text-white/40 text-[9px] md:text-xs uppercase tracking-widest mt-1">SEM MENSALIDADES</span>
                    </div>
                 </div>
-                <div className="space-y-6 md:space-y-8">
+
+                <div className="space-y-5 md:space-y-6">
                   {[
-                    'Multi-Dispositivo (TV + Celular)',
-                    '+1500 Transmissões e Acessos',
-                    'Lutas, Basquete e Ligas Mundiais',
-                    'Biblioteca de Filmes e Séries',
-                    'Delay Mínimo (Otimizado)',
-                    'Suporte Prioritário WhatsApp',
-                    'Acesso Imediato!'
+                    'Multi-Dispositivo Simultâneo',
+                    'Liberação Automática',
+                    'Todos os Dispositivos (TV+CEL+PC)',
+                    'Catálogo Completo Premium',
+                    'Melhor Estabilidade do Sistema',
+                    '+1500 Transmissões Organizadas',
+                    'Futebol, UFC, NBA, Filmes e Séries',
+                    'Prioridade Total no Suporte 24h'
                   ].map((benefit, i) => (
-                    <div key={i} className="flex items-center gap-6 text-white text-sm md:text-xl font-black uppercase tracking-tighter italic leading-tight">
-                       <Check className="w-7 h-7 text-primary stroke-[3]" /> {benefit}
+                    <div key={i} className="flex items-center gap-5 text-white text-sm md:text-2xl font-black uppercase tracking-tighter italic leading-tight group-hover:translate-x-2 transition-transform">
+                       <CheckCircle2 className="w-6 h-6 md:w-9 md:h-9 text-primary shadow-primary fill-primary/10" /> {benefit}
                     </div>
                   ))}
                 </div>
+                <p className="mt-12 text-primary/60 font-black uppercase tracking-[0.1em] text-[10px] md:text-xs text-center border border-primary/20 py-4 rounded-2xl bg-primary/5">
+                   Escolha recomendada para quem quer acesso completo sem limitações.
+                </p>
               </div>
-              <Button size="xl" className="w-full !rounded-3xl shadow-[0_20px_60px_rgba(57,255,20,0.5)] !bg-primary text-black hover:scale-105 active:scale-95 transition-all text-2xl md:text-3xl py-8" onClick={() => window.location.href = 'https://ggcheckout.app/checkout/v5/u1dc5bOd6hMB39ySfAe8'}>LIBERAR AGORA</Button>
+              <Button size="xl" className="w-full !rounded-[2rem] shadow-[0_20px_80px_rgba(57,255,20,0.6)] !bg-primary text-black hover:scale-105 active:scale-95 transition-all text-2xl md:text-4xl py-10 md:py-12" onClick={() => window.location.href = 'https://ggcheckout.app/checkout/v5/u1dc5bOd6hMB39ySfAe8'}>LIBERAR ACESSO TOTAL</Button>
+              <p className="mt-8 text-center text-white/30 text-[10px] md:text-xs font-black uppercase tracking-widest italic flex items-center justify-center gap-2">
+                 <ShieldCheck className="w-4 h-4" /> VOCÊ ESTÁ A POUCOS SEGUNDOS DO SEU ACESSO
+              </p>
             </FadeUp>
           </div>
 
@@ -860,7 +942,7 @@ export default function App() {
               className="!bg-black !text-primary !border-none px-12 md:px-24 py-8 md:py-12 text-lg md:text-5xl shadow-[0_30px_80px_rgba(0,0,0,0.5)] !rounded-[2rem] md:rounded-[3rem] hover:scale-110 active:scale-95"
               onClick={() => scrollTo('planos')}
             >
-              LIBERAR MEU ACESSO
+              LIBERAR ACESSO COMPLETO
             </Button>
             <div className="mt-8 md:mt-12 flex flex-wrap items-center justify-center gap-4 md:gap-6 text-[8px] md:text-xs font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-black/50">
                <div className="flex items-center gap-2">🟢 Pessoas acessando agora</div>
